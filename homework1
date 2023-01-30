@@ -1,0 +1,29 @@
+Question 1
+Iidfile string
+
+Question 2 
+3 
+
+Question 3 
+select count(1) from green_taxi_trips
+where lpep_pickup_datetime > '2019-01-15 00:00:00' and lpep_dropoff_datetime < '2019-01-15 23:59:59'
+
+Question 4
+select lpep_pickup_datetime, trip_distance  from green_taxi_trips
+where trip_distance IN (select max(trip_distance) from green_taxi_trips)
+
+Question 5
+select (select count(*) from green_taxi_trips
+where lpep_pickup_datetime >= '2019-01-01 00:00:00' and lpep_pickup_datetime <= '2019-01-01 23:59:59'
+and passenger_count = 2) as numb_of_2,
+(select count(*) from green_taxi_trips
+where lpep_pickup_datetime >= '2019-01-01 00:00:00' and lpep_pickup_datetime <= '2019-01-01 23:59:59'
+and passenger_count = 3) as numb_of_3
+
+Question 6
+select z."Zone" AS pickup_zone, zo."Zone" AS dropoff_zone, g."tip_amount"
+from green_taxi_trips g
+left join zones z on g."PULocationID" = z."LocationID"
+left join zones zo on g."DOLocationID" = zo."LocationID"
+where z."Zone" = 'Astoria'
+order by g."t
